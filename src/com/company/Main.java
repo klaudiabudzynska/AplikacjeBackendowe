@@ -48,6 +48,12 @@ class Time {
     }
 }
 
+class FileOperations{
+    public String[] splitLines(String text) {
+        return text.split("\r\n|\n\r|\n|\r");
+    }
+}
+
 public class Main {
 
     public static void main(String[] args) {
@@ -62,6 +68,14 @@ public class Main {
         Time time = new Time();
         time.getLocalTime();
         time.getGlobalTime();
+
+        FileOperations operations = new FileOperations();
+
+        String[] lines = operations.splitLines("line 1\nline 2");
+
+        for (String line : lines) {
+            System.out.println(line);
+        }
     }
 
     private static int searchIndex(int[] array, int value) {
