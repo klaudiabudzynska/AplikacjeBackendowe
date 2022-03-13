@@ -1,4 +1,9 @@
 package com.company;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.TimeZone;
 
 class CRC{
     int[] CRC_TABLE;
@@ -25,6 +30,24 @@ class CRC{
     }
 }
 
+class Time {
+    public void getLocalTime() {
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        System.out.println("Current local time: " + df.format(date));
+    }
+
+    public void getGlobalTime(){
+        Date date = new Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ssXXX");
+
+        df.setTimeZone(TimeZone.getTimeZone("UTC"));
+
+        System.out.println("Current global time: " + df.format(date));
+    }
+}
+
 public class Main {
 
     public static void main(String[] args) {
@@ -35,6 +58,10 @@ public class Main {
 
         CRC crc = new CRC();
         System.out.println(crc.calculate("This is example text ..."));
+
+        Time time = new Time();
+        time.getLocalTime();
+        time.getGlobalTime();
     }
 
     private static int searchIndex(int[] array, int value) {
