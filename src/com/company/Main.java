@@ -19,9 +19,8 @@ class CRC{
         for (int i = 0; i < text.length(); ++i) {
       	    int code = Character.codePointAt(text, i);
             crc = CRC_TABLE[(code ^ crc) & 0xFF] ^ (crc >>> 8);
-            System.out.println(crc);
         }
-        System.out.println(Integer.toBinaryString((-1 ^ crc) >>> 0));
+
         return (-1 ^ crc) >>> 0;
     }
 }
