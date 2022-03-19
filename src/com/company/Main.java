@@ -1,7 +1,9 @@
 package com.company;
+import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -52,11 +54,28 @@ class FileOperations{
     public String[] splitLines(String text) {
         return text.split("\r\n|\n\r|\n|\r");
     }
+
+    public void displayFile(String path) throws IOException {
+        try (InputStream input = new BufferedInputStream(new FileInputStream(path))) {
+            byte[] buffer = new byte[8192];
+            for (int length = 0; (length = input.read(buffer)) != -1; ) {
+                System.out.write(buffer, 0, length);
+            }
+        }
+    }
 }
 
 public class Main {
 
     public static void main(String[] args) {
+        FileOperations operations = new FileOperations();
+
+        try {
+            operations.displayFile("./file.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         int[] array = {4, 5, 7, 11, 12, 15, 15, 21, 40, 45 };
         int index = searchIndex(array, 11); // we want to find index for 11
 
@@ -68,8 +87,6 @@ public class Main {
         Time time = new Time();
         time.getLocalTime();
         time.getGlobalTime();
-
-        FileOperations operations = new FileOperations();
 
         String[] lines = operations.splitLines("line 1\nline 2");
 
