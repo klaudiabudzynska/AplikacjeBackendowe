@@ -63,6 +63,14 @@ class FileOperations{
             }
         }
     }
+
+    public void writeFile(String text) throws IOException {
+        try (FileOutputStream file = new FileOutputStream("./output.txt")) {
+            byte bytes[] = text.getBytes();
+            file.write(bytes);
+            file.close();
+        }
+    }
 }
 
 public class Main {
@@ -72,6 +80,14 @@ public class Main {
 
         try {
             operations.displayFile("./file.txt");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        try {
+            operations.writeFile(reader.readLine());
         } catch (IOException e) {
             e.printStackTrace();
         }
