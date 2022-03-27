@@ -101,12 +101,12 @@ public class Main {
         System.out.println("podaj zawartość pliku");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-//        try {
-//            operations.writeFile(reader.readLine());
-//        } catch (IOException e) {
-//            System.out.println("halo");
-//            e.printStackTrace();
-//        }
+        try {
+            operations.writeFile(reader.readLine());
+        } catch (IOException e) {
+            System.out.println("halo");
+            e.printStackTrace();
+        }
 
         int[] array = {4, 5, 7, 11, 12, 15, 15, 21, 40, 45 };
         int index = searchIndex(array, 11); // we want to find index for 11
