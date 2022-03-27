@@ -1,13 +1,13 @@
 package com.company;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
-
-import com.company.User;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 class CRC{
     int[] CRC_TABLE;
@@ -146,6 +146,16 @@ public class Main {
             String userJson = objectMapper.writeValueAsString(userObject);
 
             System.out.println(userJson);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        String userJson = "{\"name\":\"John\",\"age\":21}";
+        try {
+            User userParsedObject = objectMapper.readValue(userJson, User.class);
+
+            System.out.println(userParsedObject.getName());
+            System.out.println(userParsedObject.getAge());
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
