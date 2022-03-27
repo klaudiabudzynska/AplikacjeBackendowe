@@ -5,6 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import com.company.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 class CRC{
     int[] CRC_TABLE;
 
@@ -94,6 +98,7 @@ public class Main {
             e.printStackTrace();
         }
 
+        System.out.println("podaj zawartość pliku");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
 //        try {
@@ -130,6 +135,18 @@ public class Main {
                 System.out.println(line);
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        User userObject = new User("John", 21);
+
+        try {
+            String userJson = objectMapper.writeValueAsString(userObject);
+
+            System.out.println(userJson);
+        } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
     }
